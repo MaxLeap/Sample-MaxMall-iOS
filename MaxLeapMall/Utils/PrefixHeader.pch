@@ -1,0 +1,182 @@
+//
+//  PrefixHeader.pch
+//  MaxLeapGit
+//
+//  Created by XiaJun on 15/4/14.
+//  Copyright (c) 2015年 XiaJun. All rights reserved.
+//
+
+#import <Availability.h>
+#ifndef __IPHONE_8_0
+#warning "This project uses features only available in iOS SDK 8.0 and later."
+#endif
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
+#import <MobileCoreServices/MobileCoreServices.h>
+
+#import "MagicalRecord.h"
+#import "SVProgressHUD.h"
+#import <MaxLeap/MaxLeap.h>
+#import "UIImageView+WebCache.h"
+#import "SVProgressHUD.h"
+#import "SVPullToRefresh.h"
+#import "TTTAttributedLabel.h"
+#import "JSONValidation.h"
+#import "TQStarRatingView.h"
+
+#import "AppDelegate.h"
+
+#import "MLEBShoppingItem.h"
+#import "MLEBOrder.h"
+#import "MLEBComment.h"
+#import "MLEBSearchHistory.h"
+#import "MLEBWebService.h"
+#import "MLEBAddress.h"
+#import "MLEBBanner.h"
+#import "MLEBOrder.h"
+#import "MLEBOrderItem.h"
+#import "MLEBProduct.h"
+#import "MLEBProductCategory.h"
+#import "MLEBReceipt.h"
+#import "MLEBUser.h"
+
+#import "MLEBBaseViewController.h"
+
+#import "MLEBCommentTableViewCell.h"
+#import "MLEBCommentViewController.h"
+
+#import "MLEBWebService+ShoppingCart.h"
+#import "MLEBWebService+UserInfo.h"
+#import "MLEBSearchViewController.h"
+#import "MLEBProductViewController.h"
+#import "MLEBProductListViewController.h"
+#import "MLEBBannerTableViewCell.h"
+#import "MLEBProductCategoryTableViewCell.h"
+#import "MLEBProductTableViewCell.h"
+#import "MLEBProductDetailTableViewCell.h"
+#import "MLEBProductImagePreviewTableViewCell.h"
+#import "MLEBProductQuantityTableViewCell.h"
+#import "MLEBProductInfoParameterViewController.h"
+
+#import "NSBundle+Extension.h"
+#import "NSBundle+Extension.h"
+#import "NSDate+Extension.h"
+#import "NSDictionary+Extension.h"
+#import "NSString+Extension.h"
+#import "UIBarButtonItem+Extension.h"
+#import "UIImage+Extension.h"
+#import "UIView+AutoLayout.h"
+#import "UIView+CustomBorder.h"
+#import "UIView+FrameAccessor.m"
+#import "UIViewController+Extension.h"
+
+#import "MLEBCustomTabBarController.h"
+#import "MLEBCustomViewController.h"
+#import "MLEBWebViewController.h"
+#import "MLEBUserIconCell.h"
+#import "MLEBAddressesViewController.h"
+#import "MLEBAddressTableViewCell.h"
+#import "MLFFAddingAddressViewController.h"
+#import "MLEBOrderStatusTableViewCell.h"
+#import "MLEBOrderItemBriefInfoCell.h"
+#import "MLEBOrderOverallInfoCell.h"
+#import "MLEBOrderActionButtonCell.h"
+#import "MLEBShoppingCartFooterCell.h"
+#import "MLEBShoppingItemActionCell.h"
+#import "MLEBSubmitOrderViewController.h"
+#import "MLEBShoppingItemInfoCell.h"
+#import "MLEBOrderDetailCell.h"
+#import "MLEBOrderDetailViewController.h"
+#import "MLEBInvoiceContentController.h"
+#import "MLEBInvoiceHeadingViewController.h"
+#import "MLEBRemarksViewController.h"
+#import "MLEBSubmitCommentViewController.h"
+#import "MLEBCommentInputCell.h"
+#import "MLEBShoppingCartController.h"
+
+#import "MLEBWebService.h"
+#import "MLEBWebService+UserInfo.h"
+#import "MLEBWebService+ShoppingCart.h"
+#import "NSManagedObject+MLObject.h"
+
+#import "DDLog.h"
+
+#ifdef DEBUG
+static const int ddLogLevel = DDLogLevelInfo;
+#else
+static const int ddLogLevel = DDLogLevelError;
+#endif
+
+#endif
+
+#define DEFINE_SHARED_INSTANCE_USING_BLOCK(block) \
+static dispatch_once_t pred = 0; \
+__strong static id _sharedObject = nil; \
+dispatch_once(&pred, ^{ \
+_sharedObject = block(); \
+}); \
+return _sharedObject; \
+
+#define SuppressPerformSelectorLeakWarning(Stuff) \
+do { \
+_Pragma("clang diagnostic push") \
+_Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"") \
+Stuff; \
+_Pragma("clang diagnostic pop") \
+} while (0)
+
+#define BLOCK_SAFE_RUN(block, ...) block ? block(__VA_ARGS__) : nil
+
+#define BLOCK_SAFE_ASY_RUN_MainQueue(block, ...) block ? dispatch_async(dispatch_get_main_queue(), ^{\
+BLOCK_SAFE_RUN(block,__VA_ARGS__); \
+}): nil
+
+#define BLOCK_SAFE_ASY_RUN_GlobalQueue(block, ...) block ? dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){\
+BLOCK_SAFE_RUN(block,__VA_ARGS__); \
+}): nil
+
+#define SAFE_STRING(string) string ?: @""
+
+#define NULL_TO_NIL(obj) ({ __typeof__ (obj) __obj = (obj); __obj == [NSNull null] ? nil : obj; })
+
+#define execute_after_main_queue(delayInSeconds,  block) \
+dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (delayInSeconds) * NSEC_PER_SEC), dispatch_get_main_queue(), ^{ \
+BLOCK_SAFE_ASY_RUN_MainQueue(block); \
+})
+
+#define JSON_OBJECT_WITH_STRING(string) (string?[NSJSONSerialization JSONObjectWithData: [string dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:nil]:nil)
+#define JSON_STRING_WITH_OBJ(dic) (obj?[[NSString alloc]initWithData:[NSJSONSerialization dataWithJSONObject:dic options:kNilOptions error:nil] encoding:NSUTF8StringEncoding]:nil)ios io
+
+#define ImageNamed(x)               [UIImage imageNamed:x]
+#define OriginalImageNamed(x)       [[UIImage imageNamed:x] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
+#define UIColorFromRGBWithAlpha( rgbValue, a ) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
+
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+
+#define kAppVersion [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]
+#define kAppBuild [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]
+
+#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define IS_IPHONE_4 ([[UIScreen mainScreen] bounds].size.height == 480.0f || [[UIScreen mainScreen] bounds].size.width == 480.0f)
+#define IS_IPHONE_5 ([[UIScreen mainScreen] bounds].size.height == 568.0f || [[UIScreen mainScreen] bounds].size.width == 568.0f)
+#define IS_IPHONE_6 ([[UIScreen mainScreen] bounds].size.height == 667.0f || [[UIScreen mainScreen] bounds].size.width == 667.0f)
+#define IS_IPHONE_6_Plus ([[UIScreen mainScreen] bounds].size.height == 736.0f || [[UIScreen mainScreen] bounds].size.width == 736.0f)
+
+#define ScreenRect [[UIScreen mainScreen] bounds]
+
+#define kTextLightGrayColor     UIColorFromRGB(0x666666)
+
+#define CONFIGURE(configureKey) configureKey
+#define kMaxLeap_Application_ID CONFIGURE(@"569f03c860b2563b4641f1d4")
+#define kMaxLeap_Client_Key CONFIGURE(@"RnlZSjNVYUdDNEJ5NlZkLVpVRUs0QQ")
+#define kMaxLeapUserPassword CONFIGURE(@"MaxLeapUserPassword")
+#define kEBusinessAccountPassword     CONFIGURE(@"EBusinessAccountPassword")
+

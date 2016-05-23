@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+    </dependencies>
+    <scenes>
+        <!--Categories View Controller-->
+        <scene sceneID="uP7-cX-Rlp">
+            <objects>
+                <viewController storyboardIdentifier="MLEBCategoriesViewController" id="kOs-rk-I3w" customClass="MLEBCategoriesViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="WhO-ay-bnK"/>
+                        <viewControllerLayoutGuide type="bottom" id="MdO-Jv-Afs"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9tq-Ye-oqg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="48" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ldA-x8-0Uj">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="DDb-Gp-w8Q" style="IBUITableViewCellStyleDefault" id="OFQ-GW-v8v">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="48"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OFQ-GW-v8v" id="hzP-ag-JML">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="47"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DDb-Gp-w8Q">
+                                                    <rect key="frame" x="15" y="0.0" width="270" height="47"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.25098039215686274" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ldA-x8-0Uj" firstAttribute="top" secondItem="WhO-ay-bnK" secondAttribute="bottom" id="CfC-fQ-FuU"/>
+                            <constraint firstItem="ldA-x8-0Uj" firstAttribute="leading" secondItem="9tq-Ye-oqg" secondAttribute="leading" id="Nea-j6-gym"/>
+                            <constraint firstAttribute="trailing" secondItem="ldA-x8-0Uj" secondAttribute="trailing" id="am9-i6-V6k"/>
+                            <constraint firstItem="MdO-Jv-Afs" firstAttribute="top" secondItem="ldA-x8-0Uj" secondAttribute="bottom" id="m8c-dU-oKp"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="tableView" destination="ldA-x8-0Uj" id="d9z-6N-Szo"/>
+                        <segue destination="lYJ-0v-BWn" kind="show" identifier="showProductListIdentifier" id="YGB-fV-j1r"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ykt-zm-LBp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="390" y="418"/>
+        </scene>
+        <!--MLEBProductListViewController-->
+        <scene sceneID="BHU-4b-xR6">
+            <objects>
+                <viewControllerPlaceholder storyboardName="HomePage" referencedIdentifier="MLEBProductListViewController" id="lYJ-0v-BWn" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6nk-fs-ckt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="777" y="418"/>
+        </scene>
+    </scenes>
+</document>

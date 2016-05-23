@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="14F1021" minimumToolsVersion="Xcode 7.0">
+    <entity name="MLEBAddress" representedClassName="MLEBAddress" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="street" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tel" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MLEBUser" inverseName="addresses" inverseEntity="MLEBUser" syncable="YES"/>
+    </entity>
+    <entity name="MLEBBanner" representedClassName="MLEBBanner" syncable="YES">
+        <attribute name="priority" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="urlString" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="product" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MLEBProduct" syncable="YES"/>
+    </entity>
+    <entity name="MLEBComment" representedClassName="MLEBComment" syncable="YES">
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="score" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <relationship name="product" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MLEBProduct" inverseName="comments" inverseEntity="MLEBProduct" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MLEBUser" syncable="YES"/>
+    </entity>
+    <entity name="MLEBOrder" representedClassName="MLEBOrder" syncable="YES">
+        <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="deliveryMethod" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="orderId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="orderStatus" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="payMethod" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="remarks" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="totalPrice" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="address" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MLEBAddress" syncable="YES"/>
+        <relationship name="orderItems" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="MLEBOrderItem" inverseName="order" inverseEntity="MLEBOrderItem" syncable="YES"/>
+        <relationship name="receipt" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MLEBReceipt" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MLEBUser" inverseName="orders" inverseEntity="MLEBUser" syncable="YES"/>
+    </entity>
+    <entity name="MLEBOrderItem" representedClassName="MLEBOrderItem" syncable="YES">
+        <attribute name="custom_infos" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="orderItemId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="price" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="quantity" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="selected_custom_info1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="selected_custom_info2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="selected_custom_info3" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="order" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MLEBOrder" inverseName="orderItems" inverseEntity="MLEBOrder" syncable="YES"/>
+        <relationship name="product" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MLEBProduct" syncable="YES"/>
+    </entity>
+    <entity name="MLEBProduct" representedClassName="MLEBProduct" syncable="YES">
+        <attribute name="commentCount" optional="YES" attributeType="Integer 32" syncable="YES"/>
+        <attribute name="custom_info1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="custom_info2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="custom_info3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="detail" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="icons" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="info" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="intro" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mlObjectId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="originalPrice" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="price" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="services" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MLEBProductCategory" inverseName="products" inverseEntity="MLEBProductCategory" syncable="YES"/>
+        <relationship name="comments" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="MLEBComment" inverseName="product" inverseEntity="MLEBComment" syncable="YES"/>
+    </entity>
+    <entity name="MLEBProductCategory" representedClassName="MLEBProductCategory" syncable="YES">
+        <attribute name="iconUrlString" optional="YES" attributeType="String" storedInTruthFile="YES" syncable="YES"/>
+        <attribute name="isOnSales" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="recommend" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="products" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="MLEBProduct" inverseName="category" inverseEntity="MLEBProduct" syncable="YES"/>
+    </entity>
+    <entity name="MLEBReceipt" representedClassName="MLEBReceipt" syncable="YES">
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="heading" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="MLEBSearchHistory" representedClassName="MLEBSearchHistory" syncable="YES">
+        <attribute name="keyword" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="searchTime" optional="YES" attributeType="Date" syncable="YES"/>
+    </entity>
+    <entity name="MLEBShoppingItem" representedClassName="MLEBShoppingItem" syncable="YES">
+        <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="custom_infos" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mlObjectId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="quantity" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="selected_custom_info1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="selected_custom_info2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="selected_custom_info3" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="product" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="MLEBProduct" syncable="YES"/>
+    </entity>
+    <entity name="MLEBUser" representedClassName="MLEBUser" syncable="YES">
+        <attribute name="iconImage" optional="YES" attributeType="Transformable" storedInTruthFile="YES" syncable="YES"/>
+        <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tel" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="addresses" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="MLEBAddress" inverseName="user" inverseEntity="MLEBAddress" syncable="YES"/>
+        <relationship name="favorites" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="MLEBProduct" syncable="YES"/>
+        <relationship name="orders" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="MLEBOrder" inverseName="user" inverseEntity="MLEBOrder" syncable="YES"/>
+        <relationship name="shoppingItems" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="MLEBShoppingItem" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="MLEBAddress" positionX="-36" positionY="9" width="128" height="105"/>
+        <element name="MLEBBanner" positionX="-18" positionY="27" width="128" height="105"/>
+        <element name="MLEBComment" positionX="0" positionY="45" width="128" height="120"/>
+        <element name="MLEBOrder" positionX="9" positionY="54" width="128" height="225"/>
+        <element name="MLEBOrderItem" positionX="36" positionY="81" width="128" height="180"/>
+        <element name="MLEBProduct" positionX="18" positionY="63" width="128" height="270"/>
+        <element name="MLEBProductCategory" positionX="-9" positionY="36" width="128" height="120"/>
+        <element name="MLEBReceipt" positionX="-9" positionY="144" width="128" height="90"/>
+        <element name="MLEBSearchHistory" positionX="18" positionY="63" width="128" height="75"/>
+        <element name="MLEBShoppingItem" positionX="0" positionY="144" width="128" height="165"/>
+        <element name="MLEBUser" positionX="-54" positionY="-9" width="128" height="150"/>
+    </elements>
+</model>
